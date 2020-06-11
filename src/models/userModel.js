@@ -1,5 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
+var fileSchema = new Schema({
+    _id: { type: ObjectId, ref: 'users' },
+    fileName: String,
+    fileType: String,
+    filePath: String
+});
+
+
 const userSchema = new Schema({
     firstname: {
         type: String,
@@ -15,6 +24,11 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
+        required: true,
+        unique: true,
+    },
+    contactNo: {
+        type: Number,
         required: true
     },
     password: {
@@ -25,12 +39,16 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    contactNo: {
-        type: Number,
-        required: true
-    },
     DOB: {
         type: Date,
+        required: true
+    },
+    enrollDate: {
+        type: Date,
+        required: true
+    },
+    age: {
+        type: Number,
         required: true
     },
     gender: {
@@ -101,11 +119,7 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
-    userImage: {
-        type: String,
-        required: true
-    },
+    files: [fileSchema]
 });
-
 
 const User = module.exports = mongoose.model('users', userSchema);

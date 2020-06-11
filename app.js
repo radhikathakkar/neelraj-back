@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const port = 3000;
 const mongoose = require('./connection');
 const userRouter = require('./src/routes/userRouter');
+const feedbackRouter = require('./src/routes/feedbackRouter');
 app.use(bodyParser.json());
+app.use(express.static('uploads'));
 app.get('/', (req, res) => res.send('Hello World!!!!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
@@ -20,3 +22,4 @@ app.use((req, res, next) => {
 
 
 app.use('/users', userRouter);
+app.use('/feedback', feedbackRouter);
